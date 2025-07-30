@@ -17,7 +17,28 @@ public class Boss extends Monster {
         super.setHealth(super.getHealth() + (HP_PER_LEVEL * (lv - 1)));
         super.setDamage(super.getDamage() + (DAMAGE_PER_LEVEL * (lv - 1)));
         super.setArmor(super.getArmor() + (ARMOR_PER_LEVEL * (lv - 1)));
-        super.setCritDamage(3.0); // Bosses have a crit damage multiplier of 3.0
+    }
+
+    @Override
+    public void attack(Character target) {
+
+        Hit attackType = Utils.tryAttack(target.getEvasion(), this.getCritChance());
+
+        if (attackType == Hit.MISS){
+            System.out.println("MISS");
+        }
+        else if (attackType == Hit.HIT){
+            ModifiedHit modifiedAttack = new ModifiedHit(attackType, 1.4);
+            double damageDealt = Utils.damageCalc(this.getDamage(), target.getArmor(), modifiedAttack);
+            System.out.println(damageDealt);
+        }
+        else if (attackType == Hit.CRIT){
+            ModifiedHit modifiedAttack = new ModifiedHit(attackType, 3.0); // Bosses have a crit damage multiplier of 3.0
+            double damageDealt = Utils.damageCalc(this.getDamage(), target.getArmor(), modifiedAttack);
+            System.out.println(damageDealt + "!!");
+        }
+
+
     }
 
 }

@@ -14,8 +14,8 @@ public class Hero extends Character{
     }
 
     //STATED HERO
-    public Hero(String name, int lv, double hp, double att, double def, double spe, double eva, double critChance, double critDamage){
-        super(lv, hp, att, def, spe, eva, critChance,critDamage);
+    public Hero(String name, int lv, double hp, double att, double def, double spe, double eva, double critChance){
+        super(lv, hp, att, def, spe, eva, critChance);
         this.name = name;
     }
 }

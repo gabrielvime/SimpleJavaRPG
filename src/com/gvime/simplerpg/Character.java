@@ -2,9 +2,8 @@ package com.gvime.simplerpg;
 
 public class Character {
 
-    private double health, damage, armor, speed, evasion, critChance;
+    private double health, maxHealth, damage, armor, speed, evasion, critChance;
     private int level;
-    private double critDamage = 2.0; // Critical hit damage multiplier (not final because there are items that can increase it)
     public final double MAX_EVASION = 0.75; // Maximum evasion chance (75%)
     public final double MAX_CRIT_CHANCE = 1.0;// Maximum critical hit chance (100%)
 
@@ -12,6 +11,7 @@ public class Character {
     // Generates a character with random stats
     public Character() {
         this.health = Utils.getRandomDouble(10, 100);
+        this.maxHealth = this.health; // Set max health to initial health
         this.damage = Utils.getRandomDouble(1, 10);
         this.armor = Utils.getRandomDouble(1, 10);
         this.speed = Utils.getRandomDouble(0, 1);
@@ -20,19 +20,23 @@ public class Character {
     }
 
     // Generates a character with specified stats
-    public Character(int level, double hp, double att, double def, double spe, double eva, double crC, double crD) {
+    public Character(int level, double hp, double att, double def, double spe, double eva, double crC) {
         this.level = level;
         this.health = hp;
+        this.maxHealth = hp;
         this.damage = att;
         this.armor = def;
         this.speed = spe;
         this.evasion = eva;
         this.critChance = crC;
-        this.critDamage = crD;
     }
 
     public double getHealth() {
         return this.health;
+    }
+
+    public double getMaxHealth() {
+        return this.maxHealth;
     }
 
     public double getDamage() {
@@ -60,7 +64,11 @@ public class Character {
     }
 
     public void setHealth(double health) {
-        this.health = health;
+        this.health = Math.min(health, this.maxHealth);
+    }
+
+    public void setMaxHealth(double maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public void setDamage(double damage) {
@@ -87,7 +95,19 @@ public class Character {
         this.critChance = critChance;
     }
 
-    public void setCritDamage(double critDamage) {
-        this.critDamage = critDamage;
+    // ATTACK IMPLEMENTATION
+    public void attack(Character target) {
+
+        /* FIRST CHECK IF THE ATTACK MISS, NORMAL HITS OR CRITICAL */
+
+        Hit attackType = Utils.tryAttack(target.getEvasion(), this.getCritChance());
+
+        if (attackType == Hit.MISS) {
+            System.out.println("MISS");
+        } else {
+            double damageDealt = Utils.damageCalc(this.damage, target.getArmor(), attackType);
+            target.setHealth(target.getHealth() - damageDealt);
+            System.out.println(damageDealt + (attackType == Hit.CRIT ? "!!" : ""));
+        }
     }
 }
