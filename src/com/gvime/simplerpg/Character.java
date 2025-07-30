@@ -2,8 +2,12 @@ package com.gvime.simplerpg;
 
 public class Character {
 
-    private double health, damage, armor, speed, evasion;
-    int level;
+    private double health, damage, armor, speed, evasion, critChance;
+    private int level;
+    private double critDamage = 2.0; // Critical hit damage multiplier (not final because there are items that can increase it)
+    public final double MAX_EVASION = 0.75; // Maximum evasion chance (75%)
+    public final double MAX_CRIT_CHANCE = 1.0;// Maximum critical hit chance (100%)
+
 
     // Generates a character with random stats
     public Character() {
@@ -16,37 +20,43 @@ public class Character {
     }
 
     // Generates a character with specified stats
-    public Character(int level, double hp, double att, double def, double spe, double eva) {
+    public Character(int level, double hp, double att, double def, double spe, double eva, double crC, double crD) {
+        this.level = level;
         this.health = hp;
         this.damage = att;
         this.armor = def;
         this.speed = spe;
         this.evasion = eva;
-        this.level = level;
+        this.critChance = crC;
+        this.critDamage = crD;
     }
 
     public double getHealth() {
-        return health;
+        return this.health;
     }
 
     public double getDamage() {
-        return damage;
+        return this.damage;
     }
 
     public double getArmor() {
-        return armor;
+        return this.armor;
     }
 
     public double getSpeed() {
-        return speed;
+        return this.speed;
     }
 
     public double getEvasion() {
-        return evasion;
+        return this.evasion;
     }
 
     public int getLevel() {
-        return level;
+        return this.level;
+    }
+
+    public double getCritChance() {
+        return this.critChance;
     }
 
     public void setHealth(double health) {
@@ -71,5 +81,13 @@ public class Character {
 
     public void setSpeed(double speed) {
         this.speed = speed;
+    }
+
+    public void setCritChance(double critChance) {
+        this.critChance = critChance;
+    }
+
+    public void setCritDamage(double critDamage) {
+        this.critDamage = critDamage;
     }
 }
