@@ -29,8 +29,7 @@ public class Utils {
      * (I MAY REMOVE IT LATER)
      */
     public static Scanner getInput() {
-        Scanner input = new Scanner(System.in);
-        return input;
+        return new Scanner(System.in);
     }
 
     // CALCULATES THE DAMAGE DEALT BASED ON DAMAGE VALUE AND ARMOR

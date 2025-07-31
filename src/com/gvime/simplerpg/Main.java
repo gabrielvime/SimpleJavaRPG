@@ -9,7 +9,7 @@ public class Main {
         // Initialize the game
         Game gameInstance = new Game();
 
-        System.out.println("Welcome to Simple RPG!");
+        Log.output("Welcome to Simple RPG!");
 
         Party myParty = new Party();
 
@@ -28,13 +28,38 @@ public class Main {
         gameInstance.loadGame(mySave);
         gameInstance.isRunning(true);
 
-        while (gameInstance.isRunning()){
-            System.out.println("WHILE LOOP");
-            gameInstance.startGame();
-            System.out.println("Save game? (y/n)");
-            String saveChoice = Utils.getInput().nextLine();
-            if (saveChoice.equalsIgnoreCase("y")) {mySave.updateSave(gameInstance.saveGame());}
-            //gameInstance.endGame();
+        // NEW MATCH
+        while (gameInstance.getGameLevel() <= 50){
+            Log.output("Starting match at level " + gameInstance.getGameLevel() + "...");
+
+            Match match = new Match(gameInstance);
+            match.generateMonsters();
+            match.startMatch();
+
+            if (match.matchWinner()) {
+                Log.output("You won the match!");
+                gameInstance.levelUp();
+            } else {
+                Log.output("You lost the match. Game over.");
+                gameInstance.isRunning(false);
+                break;
+            }
+
+            // Save the game after each match
+            mySave.updateSave(gameInstance.getMyParty(), gameInstance.getGameLevel());
+            Log.output("Game saved with " + gameInstance.getGameLevel() + " level and " +
+                    gameInstance.getMyParty().getNumArchers() + " archers, " +
+                    gameInstance.getMyParty().getNumAssassins() + " assassins, " +
+                    gameInstance.getMyParty().getNumMages() + " mages, and " +
+                    gameInstance.getMyParty().getNumWarriors() + " warriors.");
+            Log.output("Exit Game? (Y/N)");
+            if (Utils.getInput().nextLine().equalsIgnoreCase("Y")) {
+                gameInstance.isRunning(false);
+                Log.output("Thank you for playing!");
+                break;
+            }
+            Log.output("Starting a new match...");
         }
+
     }
 }

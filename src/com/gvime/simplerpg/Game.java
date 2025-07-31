@@ -28,24 +28,13 @@ public class Game {
 
 
     public void startGame() {
-        System.out.println("TA FUNCIONANDO");
-
         this.isRunning(true);
 
-        System.out.println("Game started with " + gameLevel + " level and " +
+        Log.output("Game started with " + gameLevel + " level and " +
                 myParty.getArchers().size() + " archers, " +
                 myParty.getAssassins().size() + " assassins, " +
                 myParty.getMages().size() + " mages, and " +
                 myParty.getWarriors().size() + " warriors.");
-
-        int choice = 1;
-        while (choice != 0) {
-            System.out.println("Game is running...");
-            System.out.println("Enter 0 to end the game.");
-            choice = Utils.getInput().nextInt();
-        }
-        this.endGame();
-
     }
 
 
@@ -60,13 +49,13 @@ public class Game {
     }
 
     public void endGame() {
-        System.out.println("Game Over");
+        Log.output("Game Over");
         this.isRunning(false);
     }
 
     public Save saveGame() {
         Save mySave = new Save(myParty, gameLevel);
-        System.out.println("Game saved with " + gameLevel + " level and " +
+        Log.output("Game saved with " + gameLevel + " level and " +
                 myParty.getNumArchers() + " archers, " +
                 myParty.getNumAssassins() + " assassins, " +
                 myParty.getNumMages() + " mages, and " +
@@ -77,11 +66,30 @@ public class Game {
     public void loadGame(Save savefile) {
         this.myParty = savefile.getSaveParty();
         this.gameLevel = savefile.getSaveLevel();
-        System.out.println("Game loaded with " + gameLevel + " level and " +
+        Log.output("Game loaded with " + gameLevel + " level and " +
                 myParty.getNumArchers() + " archers, " +
                 myParty.getNumAssassins() + " assassins, " +
                 myParty.getNumMages() + " mages, and " +
                 myParty.getNumWarriors() + " warriors.");
+    }
+
+    public int getGameLevel() {
+        return this.gameLevel;
+    }
+
+    public void setGameLevel(int gameLevel) {
+        this.gameLevel = gameLevel;
+    }
+
+    public Party getMyParty() {
+        return this.myParty;
+    }
+
+    public void levelUp(){
+        this.gameLevel++;
+        for (Hero hero : myParty.getHeroes()) {
+            hero.setLevel(hero.getLevel() + 2);
+        }
     }
 
 

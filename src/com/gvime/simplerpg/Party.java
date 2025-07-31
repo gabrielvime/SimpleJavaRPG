@@ -94,6 +94,19 @@ public class Party {
     }
 
     /*
+     * SPECIAL GETTER FOR ITERATING OVER THE PARTY.
+     * THIS METHOD RETURNS AN ARRAYLIST OF ALL HEROES
+     */
+     public ArrayList<Hero> getHeroes(){
+        ArrayList<Hero> heroes = new ArrayList<>();
+        heroes.addAll(archers);
+        heroes.addAll(assassins);
+        heroes.addAll(mages);
+        heroes.addAll(warriors);
+        return heroes;
+     }
+
+    /*
      * GET HERO BY NAME.
      * THIS MAY RETURN NULL.
      * I WILL IMPLEMENT A TRY CATCH
@@ -208,6 +221,15 @@ public class Party {
 
     public boolean isEmpty() {
         return archers.isEmpty() && assassins.isEmpty() && mages.isEmpty() && warriors.isEmpty();
+    }
+
+    /*
+     * SORT A ARRAYLIST SORTED BY SPEED
+     */
+    public ArrayList<Hero> getBySpeed() {
+        ArrayList<Hero> heroes = getHeroes();
+        heroes.sort((h1, h2) -> Double.compare(h2.getSpeed(), h1.getSpeed()));
+        return heroes;
     }
 
 }

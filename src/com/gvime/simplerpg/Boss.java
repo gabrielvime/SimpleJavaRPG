@@ -12,8 +12,8 @@ public class Boss extends Monster {
     CRIT DAMAGE INCREASED
      */
 
-    public Boss (int lv) {
-        super(lv);
+    public Boss (String race, int lv) {
+        super(race, lv);
         super.setHealth(super.getHealth() + (HP_PER_LEVEL * (lv - 1)));
         super.setDamage(super.getDamage() + (DAMAGE_PER_LEVEL * (lv - 1)));
         super.setArmor(super.getArmor() + (ARMOR_PER_LEVEL * (lv - 1)));

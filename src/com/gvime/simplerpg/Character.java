@@ -4,8 +4,8 @@ public class Character {
 
     private double health, maxHealth, damage, armor, speed, evasion, critChance;
     private int level;
-    public final double MAX_EVASION = 0.75; // Maximum evasion chance (75%)
-    public final double MAX_CRIT_CHANCE = 1.0;// Maximum critical hit chance (100%)
+    //public final double MAX_EVASION = 0.75; // Maximum evasion chance (75%)
+    //public final double MAX_CRIT_CHANCE = 1.0;// Maximum critical hit chance (100%)
 
 
     // Generates a character with random stats
