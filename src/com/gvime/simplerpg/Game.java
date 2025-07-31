@@ -1,26 +1,20 @@
 package com.gvime.simplerpg;
-import java.util.ArrayList;
 
 
 public class Game {
 
-    private ArrayList<Archer> archers;
-    private ArrayList<Assassin> assassins;
-    private ArrayList<Mage> mages;
-    private ArrayList<Warrior> warriors;
+    private Party myParty;
     private int gameLevel;
     private boolean gameRunning;
 
     /*
      * CONSTRUCTOR FOR THE GAME CLASS
      * THIS CONSTRUCTOR IS USED TO CREATE A NEW GAME
-     * WITH EMPTY HERO LISTS.
+     * WITH EMPTY PARTY.
      */
+
     public Game() {
-        this.archers = new ArrayList<>();
-        this.assassins = new ArrayList<>();
-        this.mages = new ArrayList<>();
-        this.warriors = new ArrayList<>();
+        this.myParty = new Party();
         this.gameLevel = 1;
     }
 
@@ -28,16 +22,8 @@ public class Game {
      * INITIALIZE GAME WITH A GIVEN PARTY OF HEROES
      */
     public Game(Save party) {
-        this.archers = new ArrayList<>();
-        this.assassins = new ArrayList<>();
-        this.mages = new ArrayList<>();
-        this.warriors = new ArrayList<>();
+        this.myParty = new Party(party);
         this.gameLevel = 1;
-
-        this.archers.addAll(party.getArchers());
-        this.assassins.addAll(party.getAssassins());
-        this.mages.addAll(party.getMages());
-        this.warriors.addAll(party.getWarriors());
     }
 
 
@@ -47,12 +33,11 @@ public class Game {
         this.isRunning(true);
 
         System.out.println("Game started with " + gameLevel + " level and " +
-                archers.size() + " archers, " +
-                assassins.size() + " assassins, " +
-                mages.size() + " mages, and " +
-                warriors.size() + " warriors.");
+                myParty.getArchers().size() + " archers, " +
+                myParty.getAssassins().size() + " assassins, " +
+                myParty.getMages().size() + " mages, and " +
+                myParty.getWarriors().size() + " warriors.");
 
-        //Scanner input = new Scanner(System.in);
         int choice = 1;
         while (choice != 0) {
             System.out.println("Game is running...");
@@ -80,27 +65,23 @@ public class Game {
     }
 
     public Save saveGame() {
-        Save mySave = new Save(archers, assassins, mages, warriors, gameLevel);
-        System.out.println("Game saved with " + mySave.getGameLevel() + " level and " +
-                mySave.getArchers().size() + " archers, " +
-                mySave.getAssassins().size() + " assassins, " +
-                mySave.getMages().size() + " mages, and " +
-                mySave.getWarriors().size() + " warriors.");
-
+        Save mySave = new Save(myParty, gameLevel);
+        System.out.println("Game saved with " + gameLevel + " level and " +
+                myParty.getNumArchers() + " archers, " +
+                myParty.getNumAssassins() + " assassins, " +
+                myParty.getNumMages() + " mages, and " +
+                myParty.getNumWarriors() + " warriors.");
         return mySave;
     }
 
     public void loadGame(Save savefile) {
-        this.archers = savefile.getArchers();
-        this.assassins = savefile.getAssassins();
-        this.mages = savefile.getMages();
-        this.warriors = savefile.getWarriors();
-        this.gameLevel = savefile.getGameLevel();
+        this.myParty = savefile.getSaveParty();
+        this.gameLevel = savefile.getSaveLevel();
         System.out.println("Game loaded with " + gameLevel + " level and " +
-                archers.size() + " archers, " +
-                assassins.size() + " assassins, " +
-                mages.size() + " mages, and " +
-                warriors.size() + " warriors.");
+                myParty.getNumArchers() + " archers, " +
+                myParty.getNumAssassins() + " assassins, " +
+                myParty.getNumMages() + " mages, and " +
+                myParty.getNumWarriors() + " warriors.");
     }
 
 

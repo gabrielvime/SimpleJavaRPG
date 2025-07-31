@@ -3,7 +3,7 @@ package com.gvime.simplerpg;
 public class Hero extends Character{
 
     private String name;
-    private int maxLevel = 100;
+    private final int maxLevel = 100; //LEVEL CAP
 
     //ALL HEROES MUST HAVE A NAME
 
@@ -18,4 +18,17 @@ public class Hero extends Character{
         super(lv, hp, att, def, spe, eva, critChance);
         this.name = name;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+//    public int getMaxLevel() {
+//        return this.maxLevel;
+//    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

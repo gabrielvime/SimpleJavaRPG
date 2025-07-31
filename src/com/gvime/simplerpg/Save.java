@@ -2,54 +2,43 @@ package com.gvime.simplerpg;
 
 import java.util.ArrayList;
 
+
 public class Save {
 
-//    private static int archerCount;
-//    private static int assassinCount;
-//    private static int mageCount;
-//    private static int warriorCount;
-    private ArrayList<Archer> archers;
-    private ArrayList<Assassin> assassins;
-    private ArrayList<Mage> mages;
-    private ArrayList<Warrior> warriors;
-    private int gameLevel;
+    private Party saveParty;
+    private int saveLevel;
 
     /*
-        * Constructor for the Save class.
-        * This constructor is used to create a save file
-        * with the current state of the game.
+     * Constructor for the Save class.
+     * This constructor is used to create a save file
+     * with the current state of the game.
      */
-    public Save(ArrayList<Archer> archers, ArrayList<Assassin> assassins, ArrayList<Mage> mages, ArrayList<Warrior> warriors, int gameLevel) {
-        this.archers = archers;
-        this.assassins = assassins;
-        this.mages = mages;
-        this.warriors = warriors;
-        this.gameLevel = gameLevel;
+
+    public Save(Party gameParty, int gameLevel) {
+        this.saveParty = new Party(gameParty);
+        this.saveLevel = gameLevel;
     }
 
     /*
      * THERE ARE NO SETTERS FOR EACH HERO TYPE
      * AS THEY ARE NOT MEANT TO BE MODIFIED
      * DIRECTLY IN THE SAVE FILE BUT RATHER
-     * BY GAME CLASS.
+     * BY Party CLASS.
      */
-    public void updateSave(ArrayList<Archer> archers, ArrayList<Assassin> assassins, ArrayList<Mage> mages, ArrayList<Warrior> warriors, int gameLevel){
-        this.archers = archers;
-        this.assassins = assassins;
-        this.mages = mages;
-        this.warriors = warriors;
-        this.gameLevel = gameLevel;
-    };
+
 
     /*
-        * Update the save file with the current state of the game.
+     * Update the save file with the current state of the game.
      */
+
+    public void updateSave(Party gameParty, int gameLevel){
+        this.saveParty = gameParty;
+        this.saveLevel = gameLevel;
+    }
+
     public void updateSave(Save save){
-        this.archers = save.getArchers();
-        this.assassins = save.getAssassins();
-        this.mages = save.getMages();
-        this.warriors = save.getWarriors();
-        this.gameLevel = save.getGameLevel();
+        this.saveParty = save.getSaveParty();
+        this.saveLevel = save.getSaveLevel();
     }
 
     /*
@@ -58,24 +47,26 @@ public class Save {
         * and the current game level.
      */
 
+    public Party getSaveParty() { return this.saveParty; }
+
     public ArrayList<Archer> getArchers() {
-        return  archers;
+        return this.saveParty.getArchers();
     }
 
     public ArrayList<Assassin> getAssassins() {
-        return assassins;
+        return this.saveParty.getAssassins();
     }
 
     public ArrayList<Mage> getMages() {
-        return mages;
+        return this.saveParty.getMages();
     }
 
     public ArrayList<Warrior> getWarriors() {
-        return warriors;
+        return this.saveParty.getWarriors();
     }
 
-    public int getGameLevel() {
-        return gameLevel;
+    public int getSaveLevel() {
+        return saveLevel;
     }
 
 }

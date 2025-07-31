@@ -1,7 +1,6 @@
 package com.gvime.simplerpg;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Main {
 
@@ -12,24 +11,19 @@ public class Main {
 
         System.out.println("Welcome to Simple RPG!");
 
-        ArrayList<Archer> archersList = new ArrayList<Archer>();
-        ArrayList<Assassin> assassinsList = new ArrayList<Assassin>();
-        ArrayList<Mage> magesList = new ArrayList<Mage>();
-        ArrayList<Warrior> warriorsList = new ArrayList<Warrior>();
+        Party myParty = new Party();
 
         Archer myArcher = new Archer("Archer");
-        archersList.add(myArcher);
-
         Assassin myAssassin = new Assassin("Assassin");
-        assassinsList.add(myAssassin);
-
         Mage myMage = new Mage("Mage");
-        magesList.add(myMage);
-
         Warrior myWarrior = new Warrior("Warrior");
-        warriorsList.add(myWarrior);
 
-        Save mySave = new Save(archersList, assassinsList, magesList, warriorsList, 1);
+        myParty.addMember(myAssassin);
+        myParty.addMember(myArcher);
+        myParty.addMember(myMage);
+        myParty.addMember(myWarrior);
+
+        Save mySave = new Save(myParty, 1);
 
         gameInstance.loadGame(mySave);
         gameInstance.isRunning(true);
