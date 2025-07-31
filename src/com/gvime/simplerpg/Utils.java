@@ -1,5 +1,7 @@
 package com.gvime.simplerpg;
 
+import java.util.Scanner;
+
 public class Utils {
 
     // GENERATES A RANDOM DOUBLE BETWEEN MIN AND MAX (INCLUSIVE)
@@ -16,6 +18,19 @@ public class Utils {
             throw new IllegalArgumentException("Min cannot be greater than Max");
         }
         return (int) Math.floor(getRandomDouble(min, max + 1));
+    }
+
+    /*
+     * CREATES A SCANNER INSTANCE FOR USER INPUT
+     * IT'S USED TO AVOID CREATING A NEW SCANNER EVERY TIME
+     * (MAYBE IT'S NOT ACTUALLY NEEDED
+     * AND NOT A GOOD PRACTICE
+     * BUT IT'S A CONVENIENCE METHOD.)
+     * (I MAY REMOVE IT LATER)
+     */
+    public static Scanner getInput() {
+        Scanner input = new Scanner(System.in);
+        return input;
     }
 
     // CALCULATES THE DAMAGE DEALT BASED ON DAMAGE VALUE AND ARMOR
