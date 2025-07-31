@@ -99,9 +99,9 @@ public class Match {
     public void startMatch(){
 
         while (!this.heroes.isEmpty() && !this.monsters.isEmpty()) {
-            Log.output("Heroes left: " + this.heroes.getNumHeroes());
-            Log.output("Monsters left: " + this.monsters.size());
-            Log.output("-----------------------------");
+            Logger.output("Heroes left: " + this.heroes.getNumHeroes());
+            Logger.output("Monsters left: " + this.monsters.size());
+            Logger.output("-----------------------------");
             Turn.heroesTurn(this);
             Turn.monsterTurn(this);
         }
@@ -114,9 +114,9 @@ public class Match {
     public void matchWinner(boolean flag) {
         this.winner = flag;
         if (flag) {
-            Log.output("Heroes win the match!");
+            Logger.output("Heroes win the match!");
         } else {
-            Log.output("Monsters win the match!");
+            Logger.output("Monsters win the match!");
         }
     }
 

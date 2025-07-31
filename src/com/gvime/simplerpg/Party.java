@@ -178,7 +178,7 @@ public class Party {
             case Assassin assassin -> assassins.remove(hero);
             case Mage mage -> mages.remove(hero);
             case Warrior warrior -> warriors.remove(hero);
-            case null, default -> System.out.println("Hero not found in party: " + hero.getName());
+            case null, default -> Logger.output("Hero not found in party: " + hero.getName());
         }
     }
 
@@ -187,7 +187,7 @@ public class Party {
         if (hero != null) {
             this.removeMember(hero);
         } else {
-            System.out.println("Hero not found: " + heroName);
+            Logger.output("Hero not found: " + heroName);
         }
 
     }

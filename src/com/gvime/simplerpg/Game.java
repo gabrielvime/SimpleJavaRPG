@@ -30,7 +30,7 @@ public class Game {
     public void startGame() {
         this.isRunning(true);
 
-        Log.output("Game started with " + gameLevel + " level and " +
+        Logger.output("Game started with " + gameLevel + " level and " +
                 myParty.getArchers().size() + " archers, " +
                 myParty.getAssassins().size() + " assassins, " +
                 myParty.getMages().size() + " mages, and " +
@@ -49,13 +49,13 @@ public class Game {
     }
 
     public void endGame() {
-        Log.output("Game Over");
+        Logger.output("Game Over");
         this.isRunning(false);
     }
 
     public Save saveGame() {
         Save mySave = new Save(myParty, gameLevel);
-        Log.output("Game saved with " + gameLevel + " level and " +
+        Logger.output("Game saved with " + gameLevel + " level and " +
                 myParty.getNumArchers() + " archers, " +
                 myParty.getNumAssassins() + " assassins, " +
                 myParty.getNumMages() + " mages, and " +
@@ -66,7 +66,7 @@ public class Game {
     public void loadGame(Save savefile) {
         this.myParty = savefile.getSaveParty();
         this.gameLevel = savefile.getSaveLevel();
-        Log.output("Game loaded with " + gameLevel + " level and " +
+        Logger.output("Game loaded with " + gameLevel + " level and " +
                 myParty.getNumArchers() + " archers, " +
                 myParty.getNumAssassins() + " assassins, " +
                 myParty.getNumMages() + " mages, and " +
